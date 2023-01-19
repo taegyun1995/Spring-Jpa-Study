@@ -12,10 +12,16 @@ spring:
         format_sql: true
         default_batch_fetch_size: 100
       dialect: org.hibernate.dialect.MySQL8InnoDBDialect
+  data:
+    web:
+      pageable:
+        default-page-size: 10
+        max-page-size: 2000
 logging:
   level:
     org.hibernate.SQL: debug
     org.hibernate.type: trace
+
 server:
   address: 0.0.0.0
   port: 80
