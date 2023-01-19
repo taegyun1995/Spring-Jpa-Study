@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = {"id", "username", "age"})
 public class Member {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "member_id")
     private Long id;
     private String username;
@@ -26,7 +28,7 @@ public class Member {
     public Member(String username, int age, Team team) {
         this.username = username;
         this.age = age;
-        if(team != null) {
+        if (team != null) {
             changeTeam(team);
         }
     }

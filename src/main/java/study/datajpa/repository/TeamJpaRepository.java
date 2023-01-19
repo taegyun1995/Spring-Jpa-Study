@@ -28,7 +28,7 @@ public class TeamJpaRepository {
                 .getResultList();
     }
 
-    public Optional<Team> findById(Long id){
+    public Optional<Team> findById(Long id) {
         Team team = em.find(Team.class, id);
         return Optional.ofNullable(team);
     }
