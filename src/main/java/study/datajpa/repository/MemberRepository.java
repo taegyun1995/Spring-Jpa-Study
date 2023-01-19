@@ -4,7 +4,6 @@ import jakarta.persistence.LockModeType;
 import jakarta.persistence.QueryHint;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import study.datajpa.dto.MemberDto;
@@ -14,7 +13,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public interface MemberRepository extends JpaRepository<Member, Long> {
+public interface MemberRepository extends JpaRepository<Member, Long>, MemberRepositoryCustom {
 
     List<Member> findByUsernameAndAgeGreaterThan(String username, int age);
 
@@ -61,8 +60,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query("select m from Member m")
     List<Member> findMemberEntityGraph();
 
-//    @EntityGraph(attributePaths = {"team"})
-    @EntityGraph("Member.all")
+    @EntityGraph(attributePaths = {"team"})
+//    @EntityGraph("Member.all")
     List<Member> findEntityGraphByUsername(@Param("username") String username);
 
     @QueryHints(value = @QueryHint(name = "org.hibernate.readOnly", value = "true"))
