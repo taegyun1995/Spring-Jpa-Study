@@ -24,8 +24,7 @@ public class TeamJpaRepository {
     }
 
     public List<Team> findAll() {
-        return em.createQuery("select t from Team t", Team.class)
-                .getResultList();
+        return em.createQuery("select t from Team t", Team.class).getResultList();
     }
 
     public Optional<Team> findById(Long id) {
@@ -34,8 +33,6 @@ public class TeamJpaRepository {
     }
 
     public long count() {
-        return em.createQuery("select count(t) from Team t", Long.class)
-                .getSingleResult();
+        return em.createQuery("select count(t) from Team t", Long.class).getSingleResult();
     }
-
 }

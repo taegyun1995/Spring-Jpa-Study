@@ -10,7 +10,6 @@ import java.util.Optional;
 
 @Repository
 public class MemberJpaRepository {
-
     @PersistenceContext
     private EntityManager em;
 
@@ -24,8 +23,8 @@ public class MemberJpaRepository {
     }
 
     public List<Member> findAll() {
-        return em.createQuery("select m from Member m", Member.class)
-                .getResultList();
+        //JPQL
+        return em.createQuery("select m from Member m", Member.class).getResultList();
     }
 
     public Optional<Member> findById(Long id) {
@@ -42,10 +41,8 @@ public class MemberJpaRepository {
         return em.find(Member.class, id);
     }
 
-    public List<Member> findByUsernameAndAgeGreaterThen(String username, int age) {
-        return em.createQuery("select m from Member m" +
-                        " where m.username =:username and" +
-                        " m.age > :age")
+    public List<Member> findByUsernameAndAgeGreaterThan(String username, int age) {
+        return em.createQuery("select m from Member m where m.username = :username and m.age > :age")
                 .setParameter("username", username)
                 .setParameter("age", age)
                 .getResultList();
@@ -56,5 +53,4 @@ public class MemberJpaRepository {
                 .setParameter("username", username)
                 .getResultList();
     }
-
 }

@@ -1,16 +1,20 @@
 package study.datajpa.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(of = {"id", "username", "age"})
+@NoArgsConstructor
+//@ToString(of = {"id", "username", "age"}) // "team"까지 추가로 적으면 연관관계까지 끌고온다.
 @NamedQuery(
         name = "Member.findByUsername",
-        query = "select m from Member m where m.username =:username"
+        query = "select m from Member m where m.username = :username"
 )
 public class Member {
 
@@ -21,7 +25,9 @@ public class Member {
     private String username;
     private int age;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+//    protected Member() { }
+
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "team_id")
     private Team team;
 
@@ -42,7 +48,7 @@ public class Member {
         }
     }
 
-    public void changeUsername(String username) {
+    public void changeUserName(String username) {
         this.username = username;
     }
 
@@ -50,5 +56,4 @@ public class Member {
         this.team = team;
         team.getMembers().add(this);
     }
-
 }

@@ -8,9 +8,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import study.datajpa.entity.Member;
 
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -70,7 +68,7 @@ class MemberJpaRepositoryTest {
         memberJpaRepository.save(m1);
         memberJpaRepository.save(m2);
 
-        List<Member> result = memberJpaRepository.findByUsernameAndAgeGreaterThen("AAA", 15);
+        List<Member> result = memberJpaRepository.findByUsernameAndAgeGreaterThan("AAA", 15);
 
         assertThat(result.get(0).getUsername()).isEqualTo("AAA");
         assertThat(result.get(0).getAge()).isEqualTo(20);

@@ -33,22 +33,19 @@ class MemberTest {
         Member member3 = new Member("member3", 30, teamB);
         Member member4 = new Member("member4", 40, teamB);
 
-        em.persist(member1);
-        em.persist(member2);
-        em.persist(member3);
-        em.persist(member4);
+        em.persist(member1); em.persist(member2);
+        em.persist(member3); em.persist(member4);
 
-        // 초기화
-        em.flush();
-        em.clear();
+        //초기화
+        em.flush(); // 강제로 DB에 insert쿼리를 날림
+        em.clear(); //JPA에 있는 캐쉬를 날림
 
-        // 확인
-        List<Member> members = em.createQuery("select m from Member m", Member.class)
-                .getResultList();
+        //확인
+        List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList();
+
         for (Member member : members) {
             System.out.println("member = " + member);
-            System.out.println("member.team = " + member.getTeam());
+            System.out.println("-> member.team = " + member.getTeam());
         }
-
     }
 }

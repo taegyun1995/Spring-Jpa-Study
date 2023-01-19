@@ -4,24 +4,23 @@ spring:
     url: jdbc:mysql://localhost:3306/spring_jpa
     username: root
     password: 419914
-  jpa:
+
+jpa:
+  hibernate:
+    ddl-auto: create # Application 실행시점에 테이블을 생성(재생성) #create #none
+  properties:
     hibernate:
-      ddl-auto: create
-    properties:
-      hibernate:
-        format_sql: true
-        default_batch_fetch_size: 100
+      #        dialect: org.hibernate.dialect.Oracle10gDialect
+      #        show_sql: true # System.out.println에 로그를 찍음
+      format_sql: true # 한줄로 이쁘게 나오게 해줌
+      default_batch_fetch_size: 100 # 미리 땡겨올 데이터개수
+      #    open-in-view: false # 커넥션 풀을 바로 끊게해줌(영속성 컨텍스트가 @Transcational까지만 유지되게 함)
       dialect: org.hibernate.dialect.MySQL8InnoDBDialect
+
 logging:
   level:
-    org.hibernate.SQL: debug
-    org.hibernate.type: trace
+    org.hibernate.SQL: debug # 로그를 남김
+#    org.hibernate.type: trace # SQL 파라미터값을 볼 수있음.
+
 server:
-  address: 0.0.0.0
   port: 80
-  servlet:
-    session:
-      timeout: 1800
-      cookie:
-        http-only: true
-        same-site: none

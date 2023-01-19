@@ -1,15 +1,20 @@
 package study.datajpa.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static lombok.AccessLevel.PROTECTED;
+
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = PROTECTED)
 @ToString(of = {"id", "name"})
 public class Team {
 
@@ -25,5 +30,4 @@ public class Team {
     public Team(String name) {
         this.name = name;
     }
-
 }
