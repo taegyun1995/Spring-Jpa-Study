@@ -1,10 +1,7 @@
 package study.datajpa.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +15,7 @@ import static lombok.AccessLevel.PROTECTED;
 @ToString(of = {"id", "name"})
 public class Team {
 
-    @Id
-    @GeneratedValue
+    @Id @GeneratedValue
     @Column(name = "team_id")
     private Long id;
     private String name;
