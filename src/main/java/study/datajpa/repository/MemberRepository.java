@@ -37,7 +37,9 @@ public interface MemberRepository extends JpaRepository<Member, Long>, MemberRep
     List<Member> findByNames(@Param("names") Collection<String> names);
 
     List<Member> findListByUsername(String username); // 컬렉션
+
     Member findMemberByUsername(String username); // 단건
+
     Optional<Member> findOptionalByUsername(String username); // 단건 Optional
 
     @Query(value = "select m from Member m left join m.team t",

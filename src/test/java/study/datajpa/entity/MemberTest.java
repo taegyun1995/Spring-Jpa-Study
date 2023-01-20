@@ -2,18 +2,14 @@ package study.datajpa.entity;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
-import org.w3c.dom.stylesheets.LinkStyle;
 import study.datajpa.repository.MemberRepository;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -37,8 +33,10 @@ class MemberTest {
         Member member3 = new Member("member3", 30, teamB);
         Member member4 = new Member("member4", 40, teamB);
 
-        em.persist(member1); em.persist(member2);
-        em.persist(member3); em.persist(member4);
+        em.persist(member1);
+        em.persist(member2);
+        em.persist(member3);
+        em.persist(member4);
 
         //초기화
         em.flush(); // 강제로 DB에 insert쿼리를 날림
@@ -62,7 +60,7 @@ class MemberTest {
         Thread.sleep(100);
         member.setUsername("member2");
 
-        em.flush();;
+        em.flush();
         em.clear();
         //when
         Member findMember = memberRepository.findById(member.getId()).get();

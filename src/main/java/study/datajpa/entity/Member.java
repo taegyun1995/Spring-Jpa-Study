@@ -1,22 +1,26 @@
 package study.datajpa.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 //@ToString(of = {"id", "username", "age"}) // "team"까지 추가로 적으면 연관관계까지 끌고온다.
 @NamedQuery(
-        name="Member.findByUsername",
-        query="select m from Member m where m.username = :username"
+        name = "Member.findByUsername",
+        query = "select m from Member m where m.username = :username"
 )
 @NamedEntityGraph(name = "Member.all", attributeNodes = @NamedAttributeNode("team"))
 public class Member extends BaseEntity {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "member_id")
     private Long id;
     private String username;
